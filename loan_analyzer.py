@@ -65,10 +65,10 @@ loan = {
 
 # @TODO: Use get() on the dictionary of additional information to extract the Future Value and Remaining Months on the loan.
 # Print each variable.
-FV = loan.get("future_value")
-N = loan.get("remaining_months")
-print(FV)
-print(N)
+fv_calc = loan.get("future_value")
+no_months = loan.get("remaining_months")
+print(fv_calc)
+print(no_months)
 
 
 
@@ -77,7 +77,7 @@ print(N)
 #   You'll want to use the **monthly** version of the present value formula.
 #   HINT: Present Value = Future Value / (1 + Discount_Rate/12) ** remaining_months
 hurdle_rate = 0.20
-present_value = FV / (1+(hurdle_rate / 12)) ** N
+present_value = fv_calc / (1+(hurdle_rate / 12)) ** no_months
 print(f"Present Value is ${present_value: .2f}.")
 
 # If Present Value represents what the loan is really worth, does it make sense to buy the loan at its cost?
@@ -116,18 +116,19 @@ new_loan = {
 #    This function should include parameters for `future_value`, `remaining_months`, and the `annual_discount_rate`
 #    The function should return the `present_value` for the loan.
 # YOUR CODE HERE!
-annual_discount_rate = 0.20
-def calculate_present_value(PVcalc): 
-calculate_present_value(
-    new_loan["future_value"],
-    new_loan["remaining_months"],
-    annual_discount_rate)
+def calculate_present_value(fv_calc, months, ):
+    present_value = fv_calc / (1+(annual_discount_rate / 12)) ** new_loan["remaining_months"]
+    annual_discount_rate = 0.20
+    calculate_present_value(
+        new_loan["future_value"], 
+        new_loan["remaining_months"],
+        annual_discount_rate)
 
 
 # @TODO: Use the function to calculate the present value of the new loan given below.
 #    Use an `annual_discount_rate` of 0.2 for this new loan calculation.
 # YOUR CODE HERE!
-print(f"The present value of the loan is: {present_value}")
+    print(f"The present value of the loan is: {present_value: .2f}")
 
 
 """Part 4: Conditionally filter lists of loans.
@@ -206,7 +207,8 @@ with open(output_path, "w") as csvfile:
        # @TODO: Create a csvwriter
     csvwriter = csv.writer(csvfile, delimiter=",")
     csvwriter.writerow(header)
-    for item in loans:
+
+    for item in inexpensive_loans:
         csvwriter.writerow(item.values())
 
         print(item.values())
